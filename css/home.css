@@ -1,0 +1,6 @@
+@import './base/reset.css';
+@import './components/virykle.css';
+
+body {
+    padding: 40px;
+}

@@ -1,0 +1,43 @@
+.virykle {
+    display: inline-block;
+    width: 282px;
+    border: 1px solid #000;
+    margin: 20px;
+}
+.virykle > .kaitlentes {
+    display: inline-block;
+    width: 100%;
+}
+.virykle > .kaitlentes > .kaitlente {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    float: left;
+    background-color: #ca9b61;
+    border-radius: 50%;
+}
+.virykle > .kaitlentes > .kaitlente.ijungtas {
+    background-color: #f00;
+    transition: background-color 5s;
+}
+.virykle > .jungikliai {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #000;
+}
+.virykle > .jungikliai > .jungiklis {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 0 50% 50% 50%;
+    background-color: #ffce73;
+}
+.virykle > .jungikliai > .jungiklis.ijungtas {
+    transform: rotate(90deg);
+    background-color: #ffa500;
+    transition: transform 1s; 
+}
+
