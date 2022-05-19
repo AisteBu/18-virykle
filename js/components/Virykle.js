@@ -1,14 +1,18 @@
 class Virykle {
-    constructor (selector, elementsCount) {  //gaunam info
+    constructor (selector, elementsCount, id) {  //gaunam info
         this.selector = selector;           
         this.elementsCount = elementsCount;     // kaitlentes pavirsiai / kaitvietes  ...su siais dviem issisaugau info
+        this.id = id;
 
         this.DOM = null;
+        this.rangesDOM = null;                  // pirma susirandam virykle, o tada joje ieskom kaitlenciu, jungikliu
+        this.allElementsDOM = null;             // []
+        this.allSwitchesDOm = null;             // []  //null rasom, nes mes net nebandem ieskot, kai bandom kazko ieskot, tada []
         this.price = 1000; 
         this.proportion = {
             x: 1,
             y: 1
-        }                 
+        } 
 
         this.init();                        //pradedam kazka inicijuoti
     }
@@ -16,7 +20,8 @@ class Virykle {
     init() {
         if (!this.isValidSelector() ||
             !this.findElementBySelector() ||
-            !this.isValidElementsCount()) {         //pasitikrinam ar validus visi
+            !this.isValidElementsCount() ||
+            !this.isValidID()) {                   //pasitikrinam ar validus visi
             return false;
         }
 
@@ -74,6 +79,15 @@ class Virykle {
         return true;
     }
 
+    isValidID() {
+        if (typeof this.id !== 'string' ||
+            this.id === '') {
+            return false;
+        }
+        return true;
+    }
+    
+
     calcProportions() {
         this.proportion.x = Math.ceil(Math.sqrt(this.elementsCount))
         this.proportion.y = Math.ceil(this.elementsCount / this.proportion.x)
@@ -106,7 +120,7 @@ class Virykle {
         const rangesBorderWidth = 1;
         const width = fullElementWidth * this.proportion.x + rangesBorderWidth * 2;
 
-        const HTML = `<div class="virykle" style="width: ${width}px;">
+        const HTML = `<div id="${this.id}" class="virykle" style="width: ${width}px;">
                         <div class="kaitlentes">
                             ${this.generateElements()}
                         </div>
@@ -116,6 +130,11 @@ class Virykle {
                     </div> `;
 
         this.DOM.insertAdjacentHTML('beforeend', HTML);
+        this.rangesDOM = this.DOM.querySelector('#' + this.id);
+        this.allElementsDOM = this.rangesDOM.querySelectorAll('.kaitlente');         //savyje (this.DOM) - toje virykleje bandau susirasti kaitlente
+        this.allElementsDOM = this.rangesDOM.querySelectorAll('.jungiklis');         //savyje (this.DOM) - toje virykleje bandau susirasti jungikli
+
+        console.log(this);
     }
 }
 
