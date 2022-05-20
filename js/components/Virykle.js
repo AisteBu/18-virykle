@@ -7,7 +7,7 @@ class Virykle {
         this.DOM = null;
         this.rangesDOM = null;                  // pirma susirandam virykle, o tada joje ieskom kaitlenciu, jungikliu
         this.allElementsDOM = null;             // []
-        this.allSwitchesDOm = null;             // []  //null rasom, nes mes net nebandem ieskot, kai bandom kazko ieskot, tada []
+        this.allSwitchesDOM = null;             // []  //null rasom, nes mes net nebandem ieskot, kai bandom kazko ieskot, tada []
         this.price = 1000; 
         this.proportion = {
             x: 1,
@@ -27,6 +27,7 @@ class Virykle {
 
         this.calcProportions();
         this.render();                      //logikos isskaidymas i kita dali 
+        this.addEvents();
     }
 
     isValidSelector() {
@@ -120,6 +121,7 @@ class Virykle {
         const rangesBorderWidth = 1;
         const width = fullElementWidth * this.proportion.x + rangesBorderWidth * 2;
 
+        // sukonstruojamas HTML
         const HTML = `<div id="${this.id}" class="virykle" style="width: ${width}px;">
                         <div class="kaitlentes">
                             ${this.generateElements()}
@@ -129,13 +131,27 @@ class Virykle {
                         </div>
                     </div> `;
 
+        // istatome i NARSYKLE
         this.DOM.insertAdjacentHTML('beforeend', HTML);
+
+        // susirandame tai, ka katik sukureme
         this.rangesDOM = this.DOM.querySelector('#' + this.id);
         this.allElementsDOM = this.rangesDOM.querySelectorAll('.kaitlente');         //savyje (this.DOM) - toje virykleje bandau susirasti kaitlente
-        this.allElementsDOM = this.rangesDOM.querySelectorAll('.jungiklis');         //savyje (this.DOM) - toje virykleje bandau susirasti jungikli
+        this.allSwitchesDOM = this.rangesDOM.querySelectorAll('.jungiklis');         //savyje (this.DOM) - toje virykleje bandau susirasti jungikli
 
-        console.log(this);
-    }
+       }
+
+       addEvents() {
+           for (let i = 0; i < this.allSwitchesDOM.length; i++) {
+               const elementDOM = this.allElementsDOM[i];
+               const switchDOM = this.allSwitchesDOM[i];
+
+               switchDOM.addEventListener('click', () => {                  //priima parametrus: koks ivykis ir ka daryti
+                   switchDOM.classList.toggle('ijungtas');
+                   elementDOM.classList.toggle('ijungtas');
+               })                                            
+           }
+       }
 }
 
 export { Virykle }

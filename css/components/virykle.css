@@ -16,10 +16,10 @@
     float: left;
     background-color: #ca9b61;
     border-radius: 50%;
+    transition: background-color 5s;
 }
 .virykle > .kaitlentes > .kaitlente.ijungtas {
     background-color: #f00;
-    transition: background-color 5s;
 }
 .virykle > .jungikliai {
     display: flex;
@@ -34,10 +34,10 @@
     height: 30px;
     border-radius: 0 50% 50% 50%;
     background-color: #ffce73;
+    transition: transform 1s;
 }
 .virykle > .jungikliai > .jungiklis.ijungtas {
     transform: rotate(90deg);
-    background-color: #ffa500;
-    transition: transform 1s; 
+    background-color: #ffa500; 
 }
 
